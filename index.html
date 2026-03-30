@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alberto e Veronica - Lista Nozze</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Georgia", serif;
+        background-color: #F9F7F2;
+        color: #4C6A4F;
+    }
+
+    header {
+        background: linear-gradient(
+            rgba(76, 106, 79, 0.7),
+            rgba(76, 106, 79, 0.7)
+        ),
+        url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1500&q=80');
+        background-size: cover;
+        background-position: center;
+        padding: 80px 20px;
+        text-align: center;
+        color: #fff;
+    }
+
+    header h1 {
+        font-size: 42px;
+        margin: 0;
+    }
+
+    header p {
+        font-size: 20px;
+        opacity: 0.9;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .item-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+    }
+
+    .item-card {
+        background: #fff;
+        border-radius: 14px;
+        padding: 20px;
+        border: 2px solid #88A47C;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.07);
+    }
+
+    .item-card h3 {
+        margin-top: 0;
+    }
+
+    button {
+        background-color: #88A47C;
+        border: none;
+        color: white;
+        padding: 12px 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #4C6A4F;
+    }
+
+    footer {
+        text-align: center;
+        padding: 30px;
+        margin-top: 50px;
+        background: #EDF0EB;
+    }
+
+    .modal-bg {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+    }
+
+    .modal {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 450px;
+        text-align: center;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 2px solid #88A47C;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Alberto e Veronica</h1>
+    <p>La nostra lista nozze — un piccolo aiuto per il viaggio dei sogni 🌿💚</p>
+</header>
+
+<div class="container">
+    <h2>Contribuisci con un regalo</h2>
+    <p>Puoi donare in forma anonima oppure lasciare un messaggio. Grazie di cuore! ❤️</p>
+
+    <div class="item-grid" id="itemGrid"></div>
+</div>
+
+<!-- MODAL DONAZIONE -->
+<div class="modal-bg" id="modalBg">
+    <div class="modal">
+        <h2 id="modalTitle"></h2>
+        <p>Scegli tu quanto donare 💚</p>
+
+        <input type="number" id="amount" placeholder="Importo (€)" />
+
+        <textarea id="message" rows="4" placeholder="Messaggio (facoltativo)"></textarea>
+
+        <br><br>
+
+        <button onclick="donate()">Procedi alla donazione</button>
+        <br><br>
+        <button style="background:#A68A6B" onclick="closeModal()">Chiudi</button>
+    </div>
+</div>
+
+<footer>
+    <p>Grazie per il vostro affetto! 💚</p>
+</footer>
+
+<script>
+const items = [
+    "Contributo volo per il viaggio",
+    "Noleggio auto avventura",
+    "Cena romantica nella natura",
+    "Escursione guidata tra i boschi",
+    "Giornata spa nel resort",
+    "Attività snorkeling",
+    "Visita parco naturale",
+    "Notte in lodge eco-friendly",
+    "Colazione in riva al lago",
+    "Safari fotografico",
+    "Crociera al tramonto",
+    "Contributo hotel",
+    "Tour città locale",
+    "Esperienza cucina tradizionale",
+    "Trekking guidato",
+    "Giornata mare e relax",
+    "Escursione cascata",
+    "Lezione di surf",
+    "Giornata in barca",
+    "Contributo viaggio di rientro"
+];
+
+const grid = document.getElementById("itemGrid");
+
+items.forEach((name, i) => {
+    grid.innerHTML += `
+        <div class="item-card">
+            <h3>${name}</h3>
+            <p>Puoi contribuire con qualsiasi importo.</p>
+            <button onclick="openModal('${name}')">Dona</button>
+        </div>
+    `;
+});
+
+let selectedItem = "";
+
+function openModal(name) {
+    selectedItem = name;
+    document.getElementById("modalTitle").innerText = name;
+    document.getElementById("modalBg").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modalBg").style.display = "none";
+}
+
+function donate() {
+    const amount = document.getElementById("amount").value;
+    const message = document.getElementById("message").value;
+
+    const iban = "IT00X0000000000000000000000"; 
+    const paypal = "vigna.veronica@gmail.com";
+    const revolut = "https://revolut.me/verovi";
+
+    alert("Ora scegli il metodo di pagamento.\n\nBonifico, PayPal o Revolut.");
+
+    window.location.href =
+        "mailto:" +
+        paypal +
+        "?subject=Donazione%20lista%20nozze&body=" +
+        encodeURIComponent(
+            "Item: " + selectedItem +
+            "\nImporto: " + amount + "€" +
+            (message ? "\nMessaggio: " + message : "")
+        );
+}
+</script>
+
+</body>
+</html>
