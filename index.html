@@ -160,6 +160,10 @@
         <br><br>
         <button style="background:#6B47DC" onclick="payRevolut()">Revolut</button>
         <br><br>
+        <button style="background:#FF5A5F" onclick="paySatispay()">Satispay ❤️</button>
+        <br><br>
+        <button style="background:#6B47DC" onclick="payRevolutPay()">Revolut Pay ⚡</button>
+        <br><br>
         <button style="background:#2F855A" onclick="payQR()">Bonifico con QR Code 📱</button> <!-- nuovo codice QR SEPA -->
         <br><br>
 
@@ -261,7 +265,16 @@ function payRevolut() {
     window.location.href = revolutLink + window.selectedAmount;
 }
 
+function paySatispay() {
+    const link = "https://satispay.me/VERONICAVIGN/" + window.selectedAmount;
+    window.location.href = link;
+}
 
+function payRevolutPay() {
+    const link = "https://revolut.me/verovi/" + window.selectedAmount;
+    window.location.href = link;
+}
+    
 function payQR() {
     const iban = IBAN;
     const name = "Alberto e Veronica";
