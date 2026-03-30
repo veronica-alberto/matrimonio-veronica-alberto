@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
@@ -99,6 +100,7 @@
         width: 90%;
         max-width: 450px;
         text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     input, textarea {
@@ -108,6 +110,10 @@
         border: 2px solid #88A47C;
         border-radius: 8px;
         font-size: 16px;
+    }
+
+    #paymentModalBg .modal button {
+        width: 100%;
     }
 </style>
 </head>
@@ -138,9 +144,26 @@
 
         <br><br>
 
-        <button onclick="donate()">Procedi alla donazione</button>
+        <button onclick="openPaymentModal()">Procedi alla donazione</button>
         <br><br>
         <button style="background:#A68A6B" onclick="closeModal()">Chiudi</button>
+    </div>
+</div>
+
+<!-- MODAL SCELTA PAGAMENTO -->
+<div class="modal-bg" id="paymentModalBg">
+    <div class="modal">
+        <h2>Scegli il metodo di pagamento</h2>
+        <p>Grazie di cuore per il tuo contributo 💚</p>
+
+        <button style="background:#4C6A4F" onclick="payBonifico()">Bonifico bancario</button>
+        <br><br>
+        <button style="background:#0070BA" onclick="payPayPal()">PayPal</button>
+        <br><br>
+        <button style="background:#6B47DC" onclick="payRevolut()">Revolut</button>
+        <br><br>
+
+        <button style="background:#A68A6B" onclick="closePaymentModal()">Chiudi</button>
     </div>
 </div>
 
@@ -174,7 +197,7 @@ const items = [
 
 const grid = document.getElementById("itemGrid");
 
-items.forEach((name, i) => {
+items.forEach((name) => {
     grid.innerHTML += `
         <div class="item-card">
             <h3>${name}</h3>
@@ -196,44 +219,46 @@ function closeModal() {
     document.getElementById("modalBg").style.display = "none";
 }
 
-function donate() {
-    const amount = document.getElementById("amount").value;
-    const message = document.getElementById("message").value;
+// Apertura modal metodi pagamento
+function openPaymentModal() {
+    window.selectedAmount = document.getElementById("amount").value;
+    window.selectedMessage = document.getElementById("message").value;
 
-    const iban = "IT00X0000000000000000000000"; 
-    const paypal = "vigna.veronica@gmail.com";
-    const revolut = "https://revolut.me/verovi";
+    if (!window.selectedAmount || window.selectedAmount <= 0) {
+        alert("Inserisci un importo valido.");
+        return;
+    }
 
-    
-// Apri un popup per scegliere il metodo di pagamento
-    const metodo = prompt(
-        "Scegli il metodo di pagamento:\n\n" +
-        "1 - Bonifico bancario\n" +
-        "2 - PayPal\n" +
-        "3 - Revolut\n\n" +
-        "Inserisci 1, 2 o 3:"
+    document.getElementById("paymentModalBg").style.display = "flex";
+}
+
+// Chiudi modal
+function closePaymentModal() {
+    document.getElementById("paymentModalBg").style.display = "none";
+}
+
+// DATI PAGAMENTO
+const IBAN = "IT00X0000000000000000000000"; // <-- sostituire in futuro
+const paypalLink = "https://www.paypal.com/paypalme/vignaveronica/";
+const revolutLink = "https://revolut.me/verovi/";
+
+function payBonifico() {
+    alert(
+        "Dati per il bonifico:\n\n" +
+        "Intestatari: Alberto e Veronica\n" +
+        "IBAN: " + IBAN + "\n" +
+        "Causale: Lista nozze – " + selectedItem +
+        (window.selectedMessage ? " – " + window.selectedMessage : "") +
+        "\nImporto: " + window.selectedAmount + "€"
     );
+}
 
-    if (metodo === "1") {
-        // Mostra i dettagli del bonifico
-        alert(
-            "Grazie per il contributo! 💚\n\n" +
-            "Ecco i dati per il bonifico:\n\n" +
-            "Intestatari: Alberto e Veronica\n" +
-            "IBAN: " + iban + "\n" +
-            "Causale: Lista nozze - " + selectedItem + (message ? " - " + message : "") + "\n" +
-            "Importo consigliato: " + amount + "€"
-        );
-    }
+function payPayPal() {
+    window.location.href = paypalLink + window.selectedAmount;
+}
 
-    if (metodo === "2") {
-        window.location.href = paypalLink + amount;
-    }
-
-    if (metodo === "3") {
-        window.location.href = revolutLink + amount;
-    }
-
+function payRevolut() {
+    window.location.href = revolutLink + window.selectedAmount;
 }
 </script>
 
