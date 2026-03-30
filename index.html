@@ -155,33 +155,19 @@ function donate() {
     const paypalLink = "https://www.paypal.com/paypalme/vignaveronica/";
     const revolutLink = "https://revolut.me/verovi/";
     const metodo = prompt(
-        "Scegli il metodo di pagamento:
-
-" +
-        "1 - Bonifico bancario
-" +
-        "2 - PayPal
-" +
-        "3 - Revolut
-
-" +
+        "Scegli il metodo di pagamento:" +
+        "1 - Bonifico bancario" +
+        "2 - PayPal" +
+        "3 - Revolut" +
         "Inserisci 1, 2 o 3:"
     );
     if (metodo === "1") {
         alert(
-            "Grazie per il contributo! 💚
-
-" +
-            "Ecco i dati per il bonifico:
-
-" +
-            "Intestatari: Alberto e Veronica
-" +
-            "IBAN: IT00X0000000000000000000000
-" +
-            "Causale: Lista nozze - " + selectedItem + (message ? " - " + message : "") + "
-" +
-            "Importo consigliato: " + amount + "€"
+            "Grazie per il contributo! 💚" +
+            "Ecco i dati per il bonifico:" +
+            "Intestatari: Alberto e Veronica" +
+            "IBAN: IT00X0000000000000000000000" +
+            "Causale: Lista nozze - " + selectedItem + (message ? " - " + message : "") + "" 
         );
     }
     if (metodo === "2") {
