@@ -270,9 +270,9 @@ async function downloadBonificoPDF(){
 
     pdf.setFontSize(20);pdf.text('Dettagli Bonifico',20,20); //titolo
     pdf.setDrawColor(136,164,124);pdf.line(20,25,190,25); //linea floreale
-    pdf.setFontSize(12);pdf.text(`Intestatari: ${intestatari}`,20,40);pdf.text(`IBAN: ${IBAN}`,20,50);pdf.text(`Causale: {causale}`,20,60);pdf.text(`Importo: {importo}`,20,70); //testo
+    pdf.setFontSize(12);pdf.text(`Intestatari: ${intestatari}`,20,40);pdf.text(`IBAN: ${IBAN}`,20,50);pdf.text(`Causale: ${causale}`,20,60);pdf.text(`Importo: ${importo}`,20,70); //testo
     pdf.setTextColor(136,164,124);pdf.setFontSize(30);pdf.text("🍃",160,30);pdf.text("🌸",15,85); //foglie decorative
-    pdf.save('Bonifico_Lista_Nozze.pdf');
+    pdf.save('Bonifico_Lista_Nozze_AeV.pdf');
 }
     
 </script>
