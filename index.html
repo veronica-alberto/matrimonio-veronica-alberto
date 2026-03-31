@@ -109,6 +109,11 @@
         border: 2px solid #88A47C;
         border-radius: 8px;
         font-size: 16px;
+    } 
+    /*bottoni tutti larghi uguali */ 
+    .modal button {
+        width: 100%;
+        box-sizing: border-box;
     }
 
  /* Animazione foglie + petali */
@@ -306,6 +311,23 @@ function payRevolut() {
 function paySatispay() {
     window.location.href = "https://web.satispay.com/download/qrcode/S6Y-CON--A9ED49CC-1FA2-4E2F-8F21-4A0C59BC7881?locale=it";
 }
+
+/* ANIMAZIONE FOGLIE + PETALI */
+function createFallingElement(emoji) {
+    const el = document.createElement("div");
+    el.classList.add("falling");
+    el.innerText = emoji;
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.animationDuration = (5 + Math.random() * 5) + "s";
+    el.style.fontSize = (20 + Math.random() * 20) + "px";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 10000);
+}
+
+setInterval(() => {
+    const list = ["🍃", "🌸"];
+    createFallingElement(list[Math.floor(Math.random() * list.length)]);
+}, 800);
     
 </script>
 
