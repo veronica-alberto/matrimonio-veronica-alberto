@@ -16,7 +16,35 @@
         color: #4C6A4F;
         overflow-x: hidden;
     }
+    
+ /* MENU */
+    nav {
+        position: sticky;
+        top: 0;
+        background: rgba(249,247,242,0.95);
+        padding: 15px 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+    nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    nav a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #4C6A4F;
+        font-weight: bold;
+    }
+    nav a:hover {
+        color: #88A47C;
+    }
 
+    /* HEADER*/
     header {
         background: linear-gradient(
             rgba(76, 106, 79, 0.7),
@@ -133,6 +161,16 @@
 </head>
 
 <body>
+
+<!-- MENU -->
+<nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#lista">Lista Regali</a></li>
+        <li><a href="#dona">Come Donare</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+    </ul>
+</nav>
 
 <header>
     <h1>Alberto e Veronica</h1>
