@@ -292,11 +292,6 @@ async function downloadBonificoPDF() {
     pdf.text(`Causale: Lista nozze – ${selectedItem}`, 20, 60);
     pdf.text(`Importo: ${window.selectedAmount}€`, 20, 70);
 
-    pdf.setFontSize(30);
-    pdf.setTextColor(136,164,124);
-    pdf.text("🍃", 160, 30);
-    pdf.text("🌸", 15, 85);
-
     pdf.save("Bonifico_Lista_Nozze.pdf");
 }
 
