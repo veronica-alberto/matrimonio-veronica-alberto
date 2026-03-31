@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Alberto e Veronica - Lista Nozze</title>
+<link rel='preconnect' href='https://cdnjs.cloudflare.com'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'></script>
 
 <style>
     body {
@@ -156,6 +158,8 @@
 
         <button style="background:#4C6A4F" onclick="payBonifico()">Bonifico bancario</button>
         <br><br>
+        <button style='background:#2F855A' onclick='downloadBonificoPDF()'>Scarica PDF del Bonifico🌿</button>
+        <br><br>
         <!-- <button style="background:#0070BA" onclick="payPayPal()">PayPal</button>
         <br><br> OLD PAYPAL button senza logo-->
         <button style='background:#0070BA' onclick='payPayPal()'><img src='https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg' width='22' style='vertical-align:middle;margin-right:8px;'>PayPal</button>
@@ -180,23 +184,11 @@
 const items = [
     "Contributo volo per il viaggio",
     "Noleggio auto avventura",
-    "Cena romantica nella natura",
-    "Escursione guidata tra i boschi",
-    "Giornata spa nel resort",
-    "Attività snorkeling",
+    "Cena romantica",
+    "Escursione guidata",
     "Visita parco naturale",
-    "Notte in lodge eco-friendly",
-    "Colazione in riva al lago",
-    "Safari fotografico",
-    "Crociera al tramonto",
-    "Contributo hotel",
-    "Tour città locale",
     "Esperienza cucina tradizionale",
     "Trekking guidato",
-    "Giornata mare e relax",
-    "Escursione cascata",
-    "Lezione di surf",
-    "Giornata in barca",
     "Contributo viaggio di rientro"
 ];
 
@@ -268,6 +260,19 @@ function payRevolut() {
 
 function paySatispay() {
     window.location.href = "https://web.satispay.com/download/qrcode/S6Y-CON--A9ED49CC-1FA2-4E2F-8F21-4A0C59BC7881?locale=it";
+}
+async function downloadBonificoPDF(){
+    const{jsPDF}=window.jspdf;
+    const pdf=new jsPDF();
+    const intestatari = "Alberto e Veronica";
+    const causale = `Lista nozze – ${selectedItem}${window.selectedMessage ? " – " + window.selectedMessage : ""}`;
+    const importo = window.selectedAmount + "€";
+
+    pdf.setFontSize(20);pdf.text('Dettagli Bonifico',20,20); //titolo
+    pdf.setDrawColor(136,164,124);pdf.line(20,25,190,25); //linea floreale
+    pdf.setFontSize(12);pdf.text(`Intestatari: ${intestatari}`,20,40);pdf.text(`IBAN: ${IBAN}`,20,50);pdf.text(`Causale: {causale}`,20,60);pdf.text(`Importo: {importo}`,20,70); //testo
+    pdf.setTextColor(136,164,124);pdf.setFontSize(30);pdf.text("🍃",160,30);pdf.text("🌸",15,85); //foglie decorative
+    pdf.save('Bonifico_Lista_Nozze.pdf');
 }
     
 </script>
