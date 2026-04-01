@@ -5,6 +5,107 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dove & Quando - Alberto e Veronica</title>
 <style>
+
+/* MENU BOTANICO DESKTOP & MOBILE */
+nav.botanico {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 2px solid #88A47C33;
+    z-index: 9999;
+    padding: 12px 0;
+}
+
+/* LISTA MENU DESKTOP */
+nav.botanico ul {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* LINK MENU */
+nav.botanico a {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    text-decoration: none;
+    color: #4C6A4F;
+    font-weight: bold;
+    position: relative;
+    padding: 4px 8px;
+}
+
+/* FOGLIOLINA DESKTOP */
+nav.botanico a::after {
+    content: "🍃";
+    position: absolute;
+    right: -18px;
+    top: -4px;
+    opacity: 0;
+    font-size: 16px;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+nav.botanico a:hover::after {
+    opacity: 1;
+    transform: translateY(-3px);
+}
+nav.botanico a:hover {
+    color: #88A47C;
+}
+
+/* HAMBURGER ICON (solo mobile) */
+.hamburger {
+    display: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: #4C6A4F;
+    position: absolute;
+    left: 20px;
+    top: 10px;
+}
+
+/* MENU MOBILE CHIUSO */
+nav.botanico ul.mobile {
+    display: none;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 30px;
+    gap: 15px;
+}
+
+/* QUANDO MENU MOBILE È APERTO */
+nav.botanico ul.mobile.open {
+    display: flex;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    /* MOSTRA HAMBURGER */
+    .hamburger {
+        display: block;
+    }
+
+    /* NASCONDI MENU DESKTOP */
+    nav.botanico ul.desktop {
+        display: none;
+    }
+
+    /* STILE MENU MOBILE */
+    nav.botanico {
+        padding: 15px 0 10px;
+    }
+
+    nav.botanico ul.mobile a {
+        font-size: 22px;
+        padding: 6px 0;
+    }
+}
+    
 body { margin:0; font-family:Georgia, serif; background:#F9F7F2; color:#4C6A4F; }
 .container { max-width:800px; margin:40px auto; padding:20px; }
 h1 { text-align:center; margin-bottom:20px; }
@@ -15,13 +116,35 @@ a { color:#4C6A4F; }
 
 <body>
 
+<nav class="botanico">
+
+    <!-- ICONA HAMBURGER (solo mobile) -->
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+    <!-- MENU DESKTOP -->
+    <ul class="desktop">
+        <li>index.htmlLista Nozze</a></li>
+        <li>dove-e-quando.html>Dove & Quando</a></li>
+        <li>rsvp.htmlRSVP</a></li>
+    </ul>
+
+    <!-- MENU MOBILE (si apre con hamburger) -->
+    <ul class="mobile" id="mobileMenu">
+        <li>index.htmlLista Nozze</a></li>
+        <li>dove-e-quando.html>Dove & Quando</a></li>
+        <li>rsvp.htmlRSVP</a></li>
+    </ul>
+
+</nav>
+
+<!--    
 <nav style="text-align:center; padding:20px; font-size:18px;">
     <a href="index.html" style="margin:0 15px; color:#4C6A4F;">Lista Nozze</a>
     <a href="dove-e-quando.html" style="margin:0 15px; color:#4C6A4F;">Dove & Quando</a>
-    <!-- <a href="rsvp.html" style="margin:0 15px; color:#4C6A / Comune:</p>
+    <a href="rsvp.html" style="margin:0 15px; color:#4C6A / Comune:</p>
 <p><strong>[Inserisci indirizzo esatto]</strong></p>
 <p><a href="https://maps.google.com/?q=[INSERISCI+INDIRIZZO]" target="_blank">Apri su Google Maps</a></p>
-</div>
+</div> -->
 
 <div class="section">
 <h2>🕒 Orario</h2>
@@ -45,5 +168,12 @@ a { color:#4C6A4F; }
 </div>
 
 </div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("open");
+}
+</script>
+    
 </body>
 </html>
