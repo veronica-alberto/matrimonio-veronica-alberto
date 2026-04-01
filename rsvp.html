@@ -219,25 +219,36 @@ function sendRSVP(event) {
     const presenza = document.getElementById("presenza").value;
     const persone = document.getElementById("persone").value;
     const note = document.getElementById("note").value;
-    const ospitiExtra = document.querySelectorAll(".ospite-extra");
-    let nomiExtra = "";
-    ospitiExtra.forEach((input, index) => {
-        if (input.value.trim() !== "") {
-            nomiExtra += `\nOspite ${index + 2}: ${input.value}`;
+
+    const ospitiExtraInputs = document.querySelectorAll(".ospite-extra");
+    let ospitiExtra = "";
+
+    ospitiExtraInputs.forEach((input, i) => {
+        if (input.value.trim()) {
+            ospitiExtra += `Ospite ${i + 2}: ${input.value}; `;
         }
     });
 
-
-    const email = "mailto:vigna.veronica@gmail.com" +
-        "?subject=" + encodeURIComponent("RSVP - " + nome) +
-        "&body=" + encodeURIComponent(
-            "Nome: " + nome + "\n" +
-            "Presenza: " + presenza + "\n" +
-            "Numero persone: " + persone + nomiExtra + "\n" +
-            "Note: " + note
-        );
-
-    window.location.href = email;
+    fetch("https://script.google.com/macros/s/AKfycbwgZs0huq2_tPuVWurP0WM_4JnfFrG9kbPF3y81Ry_ZkpFffCud1N4vk9URTUnHRjKj7g/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            nome,
+            presenza,
+            persone,
+            ospiti_extra: ospitiExtra || "-",
+            note: note || "-"
+        })
+    })
+    .then(response => response.json())
+    .then(() => {
+        alert("Grazie! La tua conferma è stata registrata 💚");
+        event.target.reset();
+        document.getElementById("altriOspiti").innerHTML = "";
+    })
+    .catch(() => {
+        alert("Errore durante l'invio. Riprova più tardi.");
+    });
 }
 
 document.getElementById("persone").addEventListener("change", generaOspiti);
@@ -265,6 +276,34 @@ function generaOspiti() {
 }
 
 </script>
+<!-- VECCHIA FUNCTION PER INVIARE MAIL 
+    function sendRSVP(event) {
+    event.preventDefault();
 
+    const nome = document.getElementById("nome").value;
+    const presenza = document.getElementById("presenza").value;
+    const persone = document.getElementById("persone").value;
+    const note = document.getElementById("note").value;
+    const ospitiExtra = document.querySelectorAll(".ospite-extra");
+    let nomiExtra = "";
+    ospitiExtra.forEach((input, index) => {
+        if (input.value.trim() !== "") {
+            nomiExtra += `\nOspite ${index + 2}: ${input.value}`;
+        }
+    });
+
+
+    const email = "mailto:vigna.veronica@gmail.com" +
+        "?subject=" + encodeURIComponent("RSVP - " + nome) +
+        "&body=" + encodeURIComponent(
+            "Nome: " + nome + "\n" +
+            "Presenza: " + presenza + "\n" +
+            "Numero persone: " + persone + nomiExtra + "\n" +
+            "Note: " + note
+        );
+
+    window.location.href = email;
+}
+-->
 </body>
 </html>
