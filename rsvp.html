@@ -229,15 +229,15 @@ function sendRSVP(event) {
         }
     });
 
-    fetch("https://script.google.com/macros/s/AKfycbwljjMrbpcxKELMziqWfk9azLw5NOXM7TglBMSy5-KFugHqxmEJnD7hVYROb8mfLDoj/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbwu-m_VKIKTEXIo2zjOOe0Ijf7NaBv_RGbT_4fUiUMvfN92DBoqwll8ztrCiXF-5OrQTg/exec", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            nome,
-            presenza,
-            persone,
-            ospiti_extra: ospitiExtra || "-",
-            note: note || "-"
+        mode:"no-cors",
+        body: new URLSearchParams({
+        nome: nome,
+        presenza: presenza,
+        persone: persone,
+        ospiti_extra: ospitiExtra || "-",
+        note: note || "-"
         })
     })
     .then(() => {
