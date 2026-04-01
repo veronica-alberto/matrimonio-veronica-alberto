@@ -194,6 +194,8 @@ button:hover {
 <label>Numero di persone</label>
 <input type="number" id="persone" min="1" value="1">
 
+<div id="altriOspiti"></div>
+
 <label>Note (allergie, intolleranze, messaggi)</label>
 <textarea id="note" rows="4"></textarea>
 
@@ -217,18 +219,51 @@ function sendRSVP(event) {
     const presenza = document.getElementById("presenza").value;
     const persone = document.getElementById("persone").value;
     const note = document.getElementById("note").value;
+    const ospitiExtra = document.querySelectorAll(".ospite-extra");
+    let nomiExtra = "";
+    ospitiExtra.forEach((input, index) => {
+        if (input.value.trim() !== "") {
+            nomiExtra += `\nOspite ${index + 2}: ${input.value}`;
+        }
+    });
+
 
     const email = "mailto:vigna.veronica@gmail.com" +
         "?subject=" + encodeURIComponent("RSVP - " + nome) +
         "&body=" + encodeURIComponent(
             "Nome: " + nome + "\n" +
             "Presenza: " + presenza + "\n" +
-            "Numero persone: " + persone + "\n" +
+            "Numero persone: " + persone + nomiExtra + "\n" +
             "Note: " + note
         );
 
     window.location.href = email;
 }
+
+document.getElementById("persone").addEventListener("change", generaOspiti);
+
+function generaOspiti() {
+    const numero = parseInt(document.getElementById("persone").value);
+    const container = document.getElementById("altriOspiti");
+
+    container.innerHTML = "";
+
+    if (numero > 1) {
+        for (let i = 2; i <= numero; i++) {
+            const label = document.createElement("label");
+            label.innerText = `Nome e cognome ospite ${i}`;
+
+            const input = document.createElement("input");
+            input.type = "text";
+            input.placeholder = "Nome e Cognome";
+            input.className = "ospite-extra";
+
+            container.appendChild(label);
+            container.appendChild(input);
+        }
+    }
+}
+
 </script>
 
 </body>
