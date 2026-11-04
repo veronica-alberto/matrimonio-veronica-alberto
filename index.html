@@ -275,12 +275,12 @@ nav.botanico ul.mobile.open {
 
 <header>
     <h1>Alberto e Veronica</h1>
-    <p>La nostra lista nozze — un piccolo aiuto per il viaggio dei sogni </p>
+    <p>La nostra lista nozze — un piccolo aiuto per la nostra prossima avventura </p>
 </header>
 
 <div class="container">
-    <h2>Contribuisci con un regalo</h2>
-    <p>Puoi donare in forma anonima oppure lasciare un messaggio. Grazie di cuore! ❤️</p>
+    <h2>Partecipa alla nostra prossima avventura!</h2>
+    <p> Grazie di cuore! </p>
 
     <div class="item-grid" id="itemGrid"></div>
 </div>
@@ -342,8 +342,7 @@ nav.botanico ul.mobile.open {
 /*Lista item: lista elementa tra cui scegliere per regalo */
     
 const items = [
-    "Partecipa alla nostra prossima avventura!",
-    "Noleggio auto avventura",
+    "Contribuisci con un regalo",
 ];
 
 
@@ -355,8 +354,7 @@ if (grid) {
         grid.innerHTML += `
             <div class="item-card">
                 <h3>${name}</h3>
-                <p>Puoi contribuire con qualsiasi importo.</p>
-                <p>Puoi donare in forma anonima oppure lasciare un messaggio. Grazie di cuore! <p>
+                <p>Puoi contribuire con qualsiasi importo, donando in forma anonima oppure lasciando un messaggio. Grazie di cuore! <p>
                 <button onclick="openModal('${name}')">Dona</button>
             </div>
         `;
